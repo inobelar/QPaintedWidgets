@@ -45,7 +45,7 @@ inlude(<path/to>/QPaintedWidgets/q_painted_widgets.pri)
 1. Describe component look:
     ```c++
     using View
-        = TupleVertical < ComponentsTuple
+        = TupleVertical < ComponentsTuple <
             components::Text, // Top    text
             components::Text, // Middle Text
             components::Text  // Bottom text
