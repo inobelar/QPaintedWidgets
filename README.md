@@ -188,7 +188,7 @@ struct HorizontalIconButton::Gfx : public GfxView
     }
 
     // -------------------
-    // Conveninent aliases for easier access
+    // Convenient aliases for easier access
 
     auto item_bg() -> decltype( this->first() )
     {
