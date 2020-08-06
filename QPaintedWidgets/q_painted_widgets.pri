@@ -14,8 +14,10 @@ SOURCES += \
     $$PWD/QPaintedWidgets/components/RectFilledRoundedWithBorder.cpp \
     $$PWD/QPaintedWidgets/components/RectFilledWithBorder.cpp \
     $$PWD/QPaintedWidgets/components/Text.cpp \
+    $$PWD/QPaintedWidgets/components/TextOutlined.cpp \
     $$PWD/QPaintedWidgets/components/TextStatic.cpp \
-    $$PWD/QPaintedWidgets/painting/pos_from_alignment.cpp
+    $$PWD/QPaintedWidgets/painting/pos_from_alignment.cpp \
+    $$PWD/QPaintedWidgets/painting/signed_distance_field.cpp
 
 HEADERS += \
     $$PWD/QPaintedWidgets/components/Empty.hpp \
@@ -26,6 +28,7 @@ HEADERS += \
     $$PWD/QPaintedWidgets/components/RectFilledRounded.hpp \
     $$PWD/QPaintedWidgets/components/RectFilledRoundedWithBorder.hpp \
     $$PWD/QPaintedWidgets/components/RectFilledWithBorder.hpp \
+    $$PWD/QPaintedWidgets/components/TextOutlined.hpp \
     $$PWD/QPaintedWidgets/components/primitives/Circle.hpp \
     $$PWD/QPaintedWidgets/composed/generic/MayBeHidden.hpp \
     $$PWD/QPaintedWidgets/composed/generic/Nested.hpp \
@@ -51,4 +54,5 @@ HEADERS += \
     $$PWD/QPaintedWidgets/composed/generic/ComponentsTuple.hpp \
     $$PWD/QPaintedWidgets/composed/generic/WithSpacing.hpp \
     $$PWD/QPaintedWidgets/painting/pos_from_alignment.hpp \
-    $$PWD/QPaintedWidgets/painting/rect_split.hpp
+    $$PWD/QPaintedWidgets/painting/rect_split.hpp \
+    $$PWD/QPaintedWidgets/painting/signed_distance_field.hpp
