@@ -1,5 +1,11 @@
 # Qt Painted Widgets (Experimental/WIP)
 
+<p align="center">
+  <a href="http://hits.dwyl.com/inobelar/QPaintedWidgets">
+    <img title="HitCount" src="http://hits.dwyl.com/inobelar/QPaintedWidgets.svg"/>
+  </a>
+</p>
+
 Simple [DSL](https://en.wikipedia.org/wiki/Domain-specific_language)-like library for creating complex QWidget's design in declerative compile-time manner. 
 
 The **Main Goal**: utilize boilerplate during creation widgets, which appearance based on custom [`QWidget::paintEvent(QPaintEvent*)`](https://doc.qt.io/qt-5/qwidget.html#paintEvent) implementation. For example in embedded-like software, where [QSS](https://doc.qt.io/qt-5/stylesheet.html) and QML may drop perfomance drastically. **TL;DR**: as said Bjarne Stroustrup: "[Make Simple Tasks Simple](https://youtu.be/nesCaocNjtQ)".
