@@ -11,6 +11,8 @@ class Text : public AbstractText
 {
     QString _text;
 
+    Qt::TextFlag _text_flag = static_cast<Qt::TextFlag>(0); // By default - none
+
 public:
 
     using self_t = Text;
@@ -22,6 +24,13 @@ public:
 
     self_t& setText(const QString& text) override;
     QString getText() const override;
+
+    // -------------------------------------------------------------------------
+
+    // Exists here (in 'Text', not in 'AbstractText') since not appliable to
+    // other classes (like 'TextStatic').
+    self_t& setTextFlag(Qt::TextFlag flag);
+    Qt::TextFlag getTextFlag() const;
 
     // -------------------------------------------------------------------------
 

@@ -21,6 +21,24 @@ QString QPaintedWidgets::components::Text::getText() const
 
 // -----------------------------------------------------------------------------
 
+QPaintedWidgets::components::Text::self_t &QPaintedWidgets::components::Text::setTextFlag(Qt::TextFlag flag)
+{
+    if(_text_flag == flag) return (*this);
+
+    _text_flag = flag;
+
+    this->update();
+
+    return (*this);
+}
+
+Qt::TextFlag QPaintedWidgets::components::Text::getTextFlag() const
+{
+    return _text_flag;
+}
+
+// -----------------------------------------------------------------------------
+
 #include <limits>
 
 QSizeF QPaintedWidgets::components::Text::getSize() const
@@ -36,7 +54,7 @@ QSizeF QPaintedWidgets::components::Text::getSize() const
     {
         constexpr int int_max = std::numeric_limits<int>::max();
 
-        return QFontMetrics(base_t::_font).boundingRect(0, 0, int_max, int_max, _alignment /*no extra flags*/, _text).size();
+        return QFontMetrics(base_t::_font).boundingRect(0, 0, int_max, int_max, (_alignment | _text_flag), _text).size();
     }
 }
 
@@ -57,7 +75,7 @@ void QPaintedWidgets::components::Text::draw(QPainter &p, const QPen &pen, const
 
         p.setPen(pen);
         p.setBrush(Qt::NoBrush);
-        p.drawText(rect, _alignment, _text);
+        p.drawText(rect, (_alignment | _text_flag), _text);
     }
     p.restore();
 }
