@@ -6,10 +6,17 @@
 namespace QPaintedWidgets {
 
 template <typename BaseT>
-struct HorizontallyCentered : public TupleHorizontal<BaseT>
+class HorizontallyCentered : public TupleHorizontal<BaseT>
 {
+    // Items calculated rectangles, to get when they needed
+    QRect _rect_left;
+    QRect _rect_middle;
+    QRect _rect_right;
+
     static_assert (BaseT::count() == 3,
                    "Components count must be exactly 3 (left, middle, right)");
+
+public:
 
     // -------------------------------------------------------------------------
 
@@ -36,6 +43,12 @@ struct HorizontallyCentered : public TupleHorizontal<BaseT>
 
     // -------------------------------------------------------------------------
 
+    const QRect& rect_left()   const { return _rect_left;   }
+    const QRect& rect_middle() const { return _rect_middle; }
+    const QRect& rect_right()  const { return _rect_right;  }
+
+    // -------------------------------------------------------------------------
+
     virtual void draw(QPainter& p, const QRect& rect) override
     {
         auto* component_left   = left();
@@ -52,21 +65,21 @@ struct HorizontallyCentered : public TupleHorizontal<BaseT>
 
 
         // Calculate bounding rectangles for each component
-        QRect rect_left = rect;
-        rect_left.setRight(left_x  - (base_t::__spacing()) );
+        _rect_left = rect;
+        _rect_left.setRight(left_x  - (base_t::__spacing()) );
 
-        QRect rect_right = rect;
-        rect_right.setLeft(right_x + (base_t::__spacing()) );
+        _rect_right = rect;
+        _rect_right.setLeft(right_x + (base_t::__spacing()) );
 
-        QRect rect_middle = rect;
-        rect_middle.setLeft (left_x );
-        rect_middle.setRight(right_x);
+        _rect_middle = rect;
+        _rect_middle.setLeft (left_x );
+        _rect_middle.setRight(right_x);
 
 
         // Draw components in related rectangles
-        component_left  ->draw(p, rect_left  );
-        component_middle->draw(p, rect_middle);
-        component_right ->draw(p, rect_right );
+        component_left  ->draw(p, _rect_left  );
+        component_middle->draw(p, _rect_middle);
+        component_right ->draw(p, _rect_right );
     }
 };
 

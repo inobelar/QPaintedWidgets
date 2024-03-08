@@ -4,15 +4,28 @@
 #include "Tuple_Aligned.hpp"
 
 #include "QPaintedWidgets/painting/rect_split.hpp"
+#include "QPaintedWidgets/meta/std_array_size.hpp"
 
 namespace QPaintedWidgets {
 
 template <typename BaseT>
-struct TupleHorizontal : public Tuple_Aligned<BaseT>
+class TupleHorizontal : public Tuple_Aligned<BaseT>
 {
+public:
     using base_t = Tuple_Aligned<BaseT>;
 
     using base_t::base_t;
+
+    using rects_array_t = std::array<QRect, base_t::count()>;
+
+protected:
+
+    // Items calculated rectangles, to get when they needed
+    rects_array_t _rects;
+
+public:
+
+    const rects_array_t& get_rects() const { return _rects; }
 
     virtual QSize minimumSize() const override
     {
@@ -52,10 +65,19 @@ struct TupleHorizontal : public Tuple_Aligned<BaseT>
 
         const auto rects = make_rects_horizontal<COUNT>(rect, widths, base_t::__spacing());
 
-        std::size_t i = 0;
-        base_t::for_each([&p, &i, rects](components::Component* component)
+        // Store calculated items rectangles
+        static_assert(meta::array_size<decltype(_rects)>::size == meta::array_size<decltype(rects)>::size, "Rects arrays sizes mismatch");
+        for(std::size_t i = 0; i < rects.size(); ++i)
         {
-            component->draw(p, rects[i].toRect());
+            _rects[i] = rects[i].toRect();
+        }
+
+        // ---------------------------------------------------------------------
+
+        std::size_t i = 0;
+        base_t::for_each([&p, &i, this](components::Component* component)
+        {
+            component->draw(p, _rects[i]);
             ++i;
         });
     }

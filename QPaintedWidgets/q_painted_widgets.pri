@@ -43,6 +43,7 @@ HEADERS += \
     $$PWD/QPaintedWidgets/composed/generic/tuple_aligned/Tuple_Stretched.hpp \
     $$PWD/QPaintedWidgets/composed/generic/tuple_aligned/centered/HorizontallyCentered.hpp \
     $$PWD/QPaintedWidgets/composed/generic/tuple_aligned/centered/VerticallyCentered.hpp \
+    $$PWD/QPaintedWidgets/meta/std_array_size.hpp \
     $$PWD/QPaintedWidgets/meta/tuple_for_each.hpp \
     $$PWD/QPaintedWidgets/components/AbstractLine.hpp \
     $$PWD/QPaintedWidgets/components/AbstractText.hpp \

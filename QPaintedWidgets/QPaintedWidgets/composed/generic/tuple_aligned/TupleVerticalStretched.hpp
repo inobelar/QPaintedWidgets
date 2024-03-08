@@ -26,10 +26,22 @@ struct TupleVerticalStretched : public Tuple_Stretched< TupleVertical<BaseT>, St
         constexpr typename base_t::stretches_t STRETCH_FACTORS = base_t::get_stretches();
         const auto rects = make_stretched_rects_vertical<COUNT>(rect, heights, STRETCH_FACTORS, base_t::__spacing());
 
-        std::size_t i = 0;
-        base_t::for_each([&p, &i, &rects](components::Component* component)
+        // Store calculated items rectangles
+        static_assert(meta::array_size<decltype(base_t::_rects)>::size == meta::array_size<decltype(rects)>::size, "Rects arrays sizes mismatch");
+        for(std::size_t i = 0; i < rects.size(); ++i)
         {
-            component->draw(p, rects[i].toRect());
+            base_t::_rects[i] = rects[i].toRect();
+        }
+
+        // ---------------------------------------------------------------------
+
+        std::size_t i = 0;
+        base_t::for_each([&p, &i, this](components::Component* component)
+        {
+            // Unfortunately, in old gcc (like 4.9.2), we cannot use
+            // `base_t::_rects[i]` in that lambda, since its `protected` and not
+            // accessable in this context
+            component->draw(p, this->get_rects()[i]);
             ++i;
         });
     }
